@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=3 uid="uid://cw0bsi5o5bktw"]
 
-[ext_resource type="PackedScene" uid="uid://b0cn8t8lq7g1i" path="res://Simulation_UI.tscn" id="1_tytwx"]
-[ext_resource type="Script" path="res://Target_1.gd" id="2_bhvew"]
-[ext_resource type="PackedScene" uid="uid://cyarg3jeyej32" path="res://Robot_model/robo_zizala_v2.blend" id="3_1ja0l"]
-[ext_resource type="Script" path="res://SkeletonIK3D.gd" id="4_wb1e0"]
+[ext_resource type="PackedScene" uid="uid://b0cn8t8lq7g1i" path="res://Simulation_UI.tscn" id="1_ppb3h"]
+[ext_resource type="Script" path="res://Target_1.gd" id="2_pmje4"]
+[ext_resource type="PackedScene" uid="uid://cyarg3jeyej32" path="res://Robot_model/robo_zizala_v2.blend" id="3_02hdr"]
+[ext_resource type="Script" path="res://SkeletonIK3D.gd" id="4_guk58"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujqyk"]
 albedo_color = Color(0.756863, 0.415686, 0.14902, 1)
@@ -35,34 +35,6 @@ albedo_color = Color(1, 0, 0, 1)
 material = SubResource("StandardMaterial3D_80elx")
 height = 1.0
 
-[sub_resource type="Animation" id="Animation_x0q62"]
-resource_name = "target_move"
-length = 4.0
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../../../Home_target")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 4, 5, 0.5, 1, 3, 3.5, 5, 1, 1, 3, 2.65, 5, 1.5, 1, 3, 3.5, 5, 2, 1, 0, 4, 5, 2.5, 1, -3, 3.5, 5, 3, 1, -3, 2.65, 5, 3.5, 1, -3, 3.5, 5, 4, 1, 0, 4, 5)
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../../../Target_1")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1, 3),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"anim_reparent"
-}, {
-"args": [],
-"method": &"anim_deparent"
-}]
-}
-
 [sub_resource type="Animation" id="Animation_14h3r"]
 resource_name = "home_tar1"
 tracks/0/type = "value"
@@ -93,6 +65,34 @@ tracks/0/keys = {
 "values": [0.0, 1.0]
 }
 
+[sub_resource type="Animation" id="Animation_x0q62"]
+resource_name = "target_move"
+length = 4.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../Home_target")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 4, 5, 0.5, 1, 3, 3.5, 5, 1, 1, 3, 2.65, 5, 1.5, 1, 3, 3.5, 5, 2, 1, 0, 4, 5, 2.5, 1, -3, 3.5, 5, 3, 1, -3, 2.65, 5, 3.5, 1, -3, 3.5, 5, 4, 1, 0, 4, 5)
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../Target_1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"anim_reparent"
+}, {
+"args": [],
+"method": &"anim_deparent"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pfnw0"]
 _data = {
 "home_tar1": SubResource("Animation_14h3r"),
@@ -102,13 +102,11 @@ _data = {
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Node3D" type="Node3D" parent="."]
-
-[node name="Control" parent="." instance=ExtResource("1_tytwx")]
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.984808, -0.0733869, 0.157379, 0, 0.906308, 0.422618, -0.173648, -0.416198, 0.892539, 3, 7, 12)
+transform = Transform3D(0.984808, -0.0733868, 0.157378, 0, 0.906308, 0.422618, -0.173648, -0.416198, 0.892539, 3, 7, 12)
 fov = 90.0
+
+[node name="Control" parent="." instance=ExtResource("1_ppb3h")]
 
 [node name="wall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -2)
@@ -121,7 +119,7 @@ mesh = SubResource("PlaneMesh_dwvtj")
 
 [node name="Target_1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, -3.82137e-15, 3.82137e-15, 4.37114e-08, 1, 0, -1, 4.37114e-08, 3, 2.65, 5)
-script = ExtResource("2_bhvew")
+script = ExtResource("2_pmje4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Target_1"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -2.15)
@@ -140,7 +138,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("CylinderMesh_it7jl")
 skeleton = NodePath("../..")
 
-[node name="robo_zizala_v2" parent="." instance=ExtResource("3_1ja0l")]
+[node name="robo_zizala_v2" parent="." instance=ExtResource("3_02hdr")]
 transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, -1.62, 0)
 
 [node name="SkeletonIK3D" type="SkeletonIK3D" parent="robo_zizala_v2/Armature/Skeleton3D" index="0"]
@@ -149,7 +147,7 @@ root_bone = &"Bone.001"
 tip_bone = &"end_effector"
 interpolation = 0.0
 target_node = NodePath("../../../../Target_1")
-script = ExtResource("4_wb1e0")
+script = ExtResource("4_guk58")
 
 [node name="animation" type="AnimationPlayer" parent="robo_zizala_v2/Armature/Skeleton3D/SkeletonIK3D"]
 libraries = {
@@ -175,6 +173,8 @@ transform = Transform3D(0.29768, -2.51386e-11, 1.27394e-14, 1.27394e-14, -4.2818
 transform = Transform3D(0.29768, 0, 0, 0, 8.61138e-16, -0.29768, 0, 0.29768, 8.61138e-16, 0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.94574, -0.267273, 0.184772, 0, 0.568662, 0.822571, -0.324924, -0.777938, 0.537807, 5, 18.5536, 15)
+transform = Transform3D(0.939693, -0.296198, 0.17101, 0, 0.5, 0.866025, -0.34202, -0.813798, 0.469846, 0, 5.36594, 8.59298)
+top_level = true
+shadow_enabled = true
 
 [editable path="robo_zizala_v2"]
